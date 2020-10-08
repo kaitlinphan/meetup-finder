@@ -9,4 +9,4 @@ from django.utils import timezone
 
 
 def welcome(request):
-    return render(request, 'app/welcome.html', {'name': request.user.get_username()})
+    return render(request, 'app/home.html', {'name': request.user.get_username()})
