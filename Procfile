@@ -1,1 +1,1 @@
-web: gunicorn meetupfinder.wsgi --log-file -
+web: gunicorn meetupfinder.wsgi
