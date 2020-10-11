@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,24 +16,19 @@
 <body>
     
 
-    <p1 style="color:red">welcome {{ name }}</p1>
+    <h1>{{ event.title }}</h1>
     <div class="row">
-        {% for event in events %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <img class="card-img-top" src="{% static event.image %}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ event.title }}</h5>
-                    <p class="card-text">{{ event.info }}</p>
-                    <a href="{% url 'event_detail' event.pk %}"
-                    class="btn btn-primary">
-                        Read More
-                    </a>
-                </div>
-            </div>
+        <div class="col-md-8">
+            <img src="{% static event.image %}" alt="" width="100%">
         </div>
-        {% endfor %}
-    </div
+        <div class="col-md-4">
+            <h5>About the event:</h5>
+            <p>{{ event.info }}</p>
+            <br>
+            <h5>Location:</h5>
+            <p>{{ event.location }}</p>
+        </div>
+    </div>
 </body>
 
 <footer class="navbar fixed-bottom">
