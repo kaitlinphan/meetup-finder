@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'meetupfinder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'lzfnbwyq',
-        'USER' : 'lzfnbwyq',
-        'PASSWORD' : 'gJmCkvKjcvemCsGMf1sB7BG72XU1WEMk',
-        'HOST': 'ruby.db.elephantsql.com',
+        'NAME': 'd2rpo96opa3d72',
+        'USER' : 'whjnobifapsoit',
+        'PASSWORD' : 'd2284c545e344843ecb81fdc829c01e3c8bc31d40319cf313b5386510f35cab9',
+        'HOST': 'ec2-52-23-86-208.compute-1.amazonaws.com',
         'PORT': '5432' 
 
 
