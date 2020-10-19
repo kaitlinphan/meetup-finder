@@ -2,7 +2,10 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
+class User(AbstractUser):
+    pass
 
 class Event(models.Model):
     title = models.CharField('Title',max_length=200)

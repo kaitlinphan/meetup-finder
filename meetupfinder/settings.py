@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'app',
+    'meetupfinder',
 ]
 
 SITE_ID = 1
@@ -142,6 +144,9 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../app/static')
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'meetupfinder.User'
+
 try:
     # Configure Django App for Heroku.
     import django_heroku
