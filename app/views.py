@@ -33,7 +33,7 @@ def create_event(request):
         form = EventForm(request.POST)
         if form.is_valid():
             form.save()
-            message = "Comment posted successfully!"
+            message = "Event submitted!"
     else:
         message = "Fill out all fields before submitting."
     return render(request, 'app/create_event.html', {'form': EventForm(), 'message': message})
