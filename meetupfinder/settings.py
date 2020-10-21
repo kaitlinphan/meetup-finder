@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'app',
+    'crispy_forms'
 ]
 
 SITE_ID = 1
