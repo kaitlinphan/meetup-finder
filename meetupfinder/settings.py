@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,8 +35,11 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = [
-    
+    'app',
+    'userAccount',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,8 +53,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    'app',
-    'meetupfinder',
+    
+    #'meetupfinder',
 ]
 
 SITE_ID = 1
@@ -145,7 +152,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, '../app/static')
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'meetupfinder.User'
+AUTH_USER_MODEL = 'userAccount.User'
 
 try:
     # Configure Django App for Heroku.

@@ -22,3 +22,12 @@ def event_detail(request, pk):
         'event': event
     }
     return render(request, 'app/event_detail.html', context)
+
+
+
+def register(request, pk):
+    event = Event.objects.get(pk=pk)
+    context = {
+        'event': event
+    }
+    return render(request, 'app/welcome.html', context)
