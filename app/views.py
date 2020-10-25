@@ -27,6 +27,7 @@ def event_detail(request, pk):
     return render(request, 'app/event_detail.html', context)
 
 
+<<<<<<< HEAD
 def create_event(request):
     message = ""
     if request.method == "POST":
@@ -37,3 +38,12 @@ def create_event(request):
     else:
         message = "Fill out all fields before submitting."
     return render(request, 'app/create_event.html', {'form': EventForm(), 'message': message})
+=======
+
+def register(request, pk):
+    event = Event.objects.get(pk=pk)
+    context = {
+        'event': event
+    }
+    return render(request, 'app/welcome.html', context)
+>>>>>>> bm2pr

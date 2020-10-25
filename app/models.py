@@ -1,13 +1,20 @@
-import datetime
 
+
+
+import datetime
 from django.db import models
 from django.utils import timezone
 
 
+<<<<<<< HEAD
 class EventManager(models.Manager):
     def create_event(self, title, location, info, image):
         event = self.create(title=title, location=location, info=info, image=image)
         return event
+=======
+
+
+>>>>>>> bm2pr
 
 
 class Event(models.Model):
