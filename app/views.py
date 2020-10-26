@@ -56,6 +56,6 @@ def register(request, pk):
         user.save()
     
     context = {
-        'event': event
+        'events': user.EVENTS
     }
     return render(request, 'app/welcome.html', context)
