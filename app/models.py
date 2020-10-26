@@ -12,8 +12,6 @@ class EventManager(models.Manager):
         return event
 
 
-
-
 class Event(models.Model):
     title = models.CharField('Title',max_length=200)
     location = models.CharField('Location', max_length=150)

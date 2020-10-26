@@ -3,6 +3,9 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from app.models import Event
 
+from app.forms import EventForm
+
+
 from userAccount.models import User
 
 import datetime
@@ -40,6 +43,18 @@ def create_event(request):
 
 def register(request, pk):
     event = Event.objects.get(pk=pk)
+    user_email = request.user.get_username()
+    user = User.objects.get(pk=user_email)
+
+
+    is_in = False
+    if (event in user.EVENTS):  
+        is_in = True
+
+    if (not is_in):
+        user.EVENTS.append(event)
+        user.save()
+    
     context = {
         'event': event
     }
