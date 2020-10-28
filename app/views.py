@@ -40,22 +40,34 @@ def create_event(request):
         message = "Fill out all fields before submitting."
     return render(request, 'app/create_event.html', {'form': EventForm(), 'message': message})
 
-
+from django.forms import ModelForm
 def register(request, pk):
     event = Event.objects.get(pk=pk)
+    
     user_email = request.user.get_username()
     user = User.objects.get(pk=user_email)
 
 
+    qset = user.EVENTS.filter(pk=event.pk)
+
+    if not qset:
+        user.EVENTS.add(event)
+        user.save()
+    
+    
+    '''
     is_in = False
     if (event in user.EVENTS):  
         is_in = True
 
     if (not is_in):
-        user.EVENTS.append(event)
-        user.save()
+        user.EVENTS.add(event)
+        user.save()'''
     
+    
+    
+
     context = {
-        'events': user.EVENTS
+        'events': user.EVENTS.all()
     }
     return render(request, 'app/welcome.html', context)
