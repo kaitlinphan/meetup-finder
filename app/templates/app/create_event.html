@@ -18,8 +18,7 @@
 
 
 {% block content %}
-{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
-<form action="{% url 'create_event' %}" method="post" novalidate>
+<form action="{% url 'create_event' %}" method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     <div class="row">
         <div class="col-2">

@@ -10,6 +10,7 @@ from userAccount.models import User
 
 import datetime
 
+
 # Create your views here.
 class HomeView(generic.ListView):
     template_name = 'app/home.html'
@@ -30,15 +31,14 @@ def event_detail(request, pk):
     return render(request, 'app/event_detail.html', context)
 
 def create_event(request):
-    message = ""
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            message = "Event submitted!"
+            return redirect(event_index)
     else:
-        message = "Fill out all fields before submitting."
-    return render(request, 'app/create_event.html', {'form': EventForm(), 'message': message})
+        form = EventForm()
+    return render(request, 'app/create_event.html', {'form': form})
 
 from django.forms import ModelForm
 def register(request, pk):

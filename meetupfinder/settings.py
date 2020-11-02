@@ -13,7 +13,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -95,12 +94,8 @@ WSGI_APPLICATION = 'meetupfinder.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2rpo96opa3d72',
-        'USER' : 'whjnobifapsoit',
-        'PASSWORD' : 'd2284c545e344843ecb81fdc829c01e3c8bc31d40319cf313b5386510f35cab9',
-        'HOST': 'ec2-52-23-86-208.compute-1.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
@@ -153,9 +148,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, '../app/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login"
 AUTH_USER_MODEL = 'userAccount.User'
 
 try:
