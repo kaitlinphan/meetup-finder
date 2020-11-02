@@ -19,7 +19,7 @@
     <h1>{{ event.title }}</h1>
     <div class="row">
         <div class="col-md-8">
-            <img src="{% static event.image %}" alt="" width="100%">
+            <img src="{{ event.image.url }}" alt="" width="100%">
         </div>
         <div class="col-md-4">
             <h5>About the event:</h5>
