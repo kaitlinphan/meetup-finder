@@ -1,7 +1,7 @@
-from django.contrib import admin
+
 from .models import Event
-
-
+from django.contrib import admin
+from userAccount.models import User
 class EventAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Title', {'fields': ['title']}),
@@ -10,3 +10,4 @@ class EventAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Event)
+admin.site.register(User)
