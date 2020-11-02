@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'django_google_maps',
+    # 'geoposition',
 
     'app',
 ]
@@ -122,6 +124,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyC9XFiEJhU59cDGZ3QJ0tgAvlN6YK9x1zg'
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyC9XFiEJhU59cDGZ3QJ0tgAvlN6YK9x1zg'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
