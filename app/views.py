@@ -45,8 +45,8 @@ def register(request, pk):
     event = Event.objects.get(pk=pk)
     
     user_email = request.user.get_username()
+    user_name = request.user
     user = User.objects.get(pk=user_email)
-
 
     qset = user.EVENTS.filter(pk=event.pk)
 
@@ -54,20 +54,9 @@ def register(request, pk):
         user.EVENTS.add(event)
         user.save()
     
-    
-    '''
-    is_in = False
-    if (event in user.EVENTS):  
-        is_in = True
-
-    if (not is_in):
-        user.EVENTS.add(event)
-        user.save()'''
-    
-    
-    
 
     context = {
-        'events': user.EVENTS.all()
+        'events': user.EVENTS.all(),
+        'user' : user_name
     }
     return render(request, 'app/welcome.html', context)

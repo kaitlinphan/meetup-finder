@@ -40,24 +40,21 @@ from django.contrib.postgres.fields import ArrayField
 class User(AbstractUser):
     email 					= models.EmailField(verbose_name="email", primary_key=True, max_length=60, unique=True)
     username 				= models.CharField(max_length=30, unique=True)
-    date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
-    last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
+    #date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+    #last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin				= models.BooleanField(default=False)
     is_active				= models.BooleanField(default=True)
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
     EVENTS					= models.ManyToManyField(Event)
-    #EVENTS					= ArrayField(Event.pk)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
-    #EVENTS = []
-
     objects = MyAccountManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
 	# For checking permissions. to keep it simple all admin have ALL permissons
     def has_perm(self, perm, obj=None):
