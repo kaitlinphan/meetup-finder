@@ -17,6 +17,10 @@ class HomeView(generic.ListView):
     context_object_name = 'event_list'
 
 def event_index(request):
+    user_email = request.user.get_username()
+    user = User.objects.get(pk=user_email)
+    user.save()
+
     events = Event.objects.all()
     context = {
         'events': events
@@ -52,7 +56,7 @@ def register(request, pk):
 
     if not qset:
         user.EVENTS.add(event)
-        user.save()
+    user.save()
     
 
     context = {
