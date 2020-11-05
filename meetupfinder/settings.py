@@ -49,6 +49,18 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+'''
+Login Stuff
+'''
+LOGIN_REDIRECT_URL = '/login/'
+#ACCOUNT_LOGOUT_REDIRECT_URL ='/logout/'
+
+
+ACCOUNT_FORMS = {
+'signup': 'app.forms.CustomSignupForm',
+}
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
