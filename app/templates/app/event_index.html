@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <p1 style="color:red">Welcome {{ user }}!</p1>
+    <p1 style="color:red">Welcome {{ request.user }}!</p1>
     <div>
         <a href="{% url 'create_event' %}"
         class="btn btn-primary">
