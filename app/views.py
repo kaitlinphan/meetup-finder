@@ -10,7 +10,7 @@ from app.forms import EventForm
 def event_index(request):
     events = Event.objects.all()
     context = {
-        'events': events
+        'events': events,
     }
     return render(request, 'app/event_index.html', context)
 
