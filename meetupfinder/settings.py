@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'AZ6bP6g2P6sSrdd4',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '5432'
     }
 }
@@ -100,6 +100,9 @@ DATABASES = {
 # import dj_database_url
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 
 AUTHENTICATION_BACKENDS = [
     
