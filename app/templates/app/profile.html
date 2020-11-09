@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <body>
+    <h2>Registered Events</h2>
+    {% if not events %}<p>No events registered.</p>
+    {% else %}
+        <div class="row">
+        {% for event in events %}
+            <div class="col-md-4">
+                <div class="card mb-2">
+                    <img class="card-img-top" src="{{ event.event.image.url }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.event.title }}</h5>
+                        <p class="card-text">{{ event.event.info }}</p>
+                    </div>
+                    <a href="{% url 'app:unregister' event.event.pk %}"
+                       class="btn btn-primary">
+                        Unregister
+                    </a>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    </body>
+{% endblock %}

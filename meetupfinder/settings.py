@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'app',
-    'userAccount',
     'crispy_forms',
 
 ]
@@ -68,7 +67,7 @@ ROOT_URLCONF = 'meetupfinder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'app/templates'), os.path.join(BASE_DIR, 'meetupfinder/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,23 +86,20 @@ WSGI_APPLICATION = 'meetupfinder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'AZ6bP6g2P6sSrdd4',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 
 AUTHENTICATION_BACKENDS = [
     
@@ -138,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Etc/GMT+4'
 
 USE_I18N = True
 
@@ -156,8 +152,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login"
-AUTH_USER_MODEL = 'userAccount.User'
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/profile"
 
 try:
     # Configure Django App for Heroku.
