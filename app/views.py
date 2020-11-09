@@ -74,3 +74,15 @@ def profile(request):
         'events': registered_events,
     }
     return render(request, 'app/profile.html', context)
+
+
+def search(request):
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        events_check_info = Event.objects.filter(info__icontains=query_string)
+        events_check_title = Event.objects.filter(title__icontains=query_string)
+        events = events_check_info | events_check_title
+        return render(request, 'app/event_index.html', {'events': events})
+    else:
+        events = Event.objects.all()
+        return render(request, 'app/event_index.html', {'events': events})

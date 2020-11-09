@@ -7,7 +7,8 @@ class Event(models.Model):
     location = models.CharField('Location', max_length=150)
     info = models.TextField()
     image = models.ImageField(upload_to="images")
-
+    xcoord = models.FloatField(default=0.0)
+    ycoord = models.FloatField(default=0.0)
 
 class RegisteredEvents(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
