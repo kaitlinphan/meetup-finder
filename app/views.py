@@ -23,7 +23,8 @@ def event_index(request):
 
     events = Event.objects.all()
     context = {
-        'events': events
+        'events': events,
+        'user' : user.username
     }
     return render(request, 'app/event_index.html', context)
 
@@ -49,8 +50,10 @@ def register(request, pk):
     event = Event.objects.get(pk=pk)
     
     user_email = request.user.get_username()
-    user_name = request.user
+    
     user = User.objects.get(pk=user_email)
+    
+    user_name = user.username
 
     qset = user.EVENTS.filter(pk=event.pk)
 
