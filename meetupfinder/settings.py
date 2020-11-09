@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'app',
-    'userAccount',
     'crispy_forms',
 
 ]
@@ -66,7 +65,7 @@ ROOT_URLCONF = 'meetupfinder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'app/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Etc/GMT+4'
 
 USE_I18N = True
 
@@ -151,8 +150,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login"
-AUTH_USER_MODEL = 'userAccount.User'
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/profile"
 
 try:
     # Configure Django App for Heroku.

@@ -1,22 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <title>Meetup Finder</title>
-</head>
-
-<body>
-    
-
+{% block content %}
+    <body>
     <h1>{{ event.title }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <div class="row">
         <div class="col-md-8">
             <img src="{{ event.image.url }}" alt="" width="100%">
@@ -30,17 +18,12 @@
         </div>
     </div>
 
+    {% if user.is_authenticated %}
+        <form action="{% url 'app:register' event.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Register</button>
+        </form>
+    {% endif %}
+    </body>
 
-
-    <form method="get" action="register">
-        <button type="submit">register</button>
-    </form>
-
-
-</body>
-
-<footer class="navbar fixed-bottom">
-    <p>Authors: Bijan, Kaitlin, Maria, Maven <a href="https://github.com/uva-cs3240-f20/project-2-11" </a></p>
-</footer>
-
-</html>
+{% endblock %}

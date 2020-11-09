@@ -1,31 +1,19 @@
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from app.models import Event
+from django.shortcuts import render, redirect, get_object_or_404
+from app.models import Event, RegisteredEvents
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from app.forms import EventForm
 
 
-from userAccount.models import User
-
-import datetime
-
-
 # Create your views here.
-class HomeView(generic.ListView):
-    template_name = 'app/home.html'
-    context_object_name = 'event_list'
-
 def event_index(request):
-    user_email = request.user.get_username()
-    user = User.objects.get(pk=user_email)
-    user.save()
-
     events = Event.objects.all()
     context = {
         'events': events
     }
     return render(request, 'app/event_index.html', context)
+
 
 def event_detail(request, pk):
     event = Event.objects.get(pk=pk)
@@ -34,33 +22,55 @@ def event_detail(request, pk):
     }
     return render(request, 'app/event_detail.html', context)
 
+
 def create_event(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('app:event_index'))
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect(event_index)
+            return HttpResponseRedirect(reverse('app:event_index'))
     else:
         form = EventForm()
-    return render(request, 'app/create_event.html', {'form': form})
+        context = {
+            'form': form,
+            'logged_in': True
+        }
+        return render(request, 'app/create_event.html', context)
 
-from django.forms import ModelForm
-def register(request, pk):
-    event = Event.objects.get(pk=pk)
-    
-    user_email = request.user.get_username()
-    user_name = request.user
-    user = User.objects.get(pk=user_email)
 
-    qset = user.EVENTS.filter(pk=event.pk)
+def register(request, event_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('app:event_index'))
+    event = get_object_or_404(Event, pk=event_id)
+    # adds event to list of registered events
+    if RegisteredEvents.objects.filter(event=event, user=request.user).exists():
+        context = {
+            'event': event,
+            'error_message': "Already registered!",
+            'logged_in': True
+        }
+        return render(request, 'app/event_detail.html', context)
+    registered_event = RegisteredEvents(event=event, user=request.user)
+    registered_event.save()
+    return HttpResponseRedirect(reverse('app:profile'))
 
-    if not qset:
-        user.EVENTS.add(event)
-    user.save()
-    
 
+def unregister(request, event_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('app:event_index'))
+    event = get_object_or_404(Event, pk=event_id)
+    # removes event from list of registered events
+    RegisteredEvents.objects.filter(event=event, user=request.user).delete()
+    return HttpResponseRedirect(reverse('app:profile'))
+
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('app:event_index'))
+    registered_events = RegisteredEvents.objects.filter(user=request.user)
     context = {
-        'events': user.EVENTS.all(),
-        'user' : user_name
+        'events': registered_events,
     }
-    return render(request, 'app/welcome.html', context)
+    return render(request, 'app/profile.html', context)
