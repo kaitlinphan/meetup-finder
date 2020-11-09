@@ -35,7 +35,7 @@
         {% endfor %}
     </div>
 
-    <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+    <!-- <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
 		<div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div><script>(function () {
         var setting = {"height":540,"width":706,"zoom":17,"queryString":"1215 Lee St, Charlottesville, VA, USA","place_id":"ChIJJaYjDUeGs4kRZWb8qMcZ2M0","satellite":false,"centerCoord":[38.031443012421086,-78.4987554],"cid":"0xcdd819c7a8fc6665","lang":"en","cityUrl":"/us/va/charlottesville-2347","cityAnchorText":"Map of Charlottesville, Virginia, United States","id":"map-9cd199b9cc5410cd3b1ad21cab2e54d3","embed_id":"290615"};
         var d = document;
@@ -47,7 +47,47 @@
         };
         var to = d.getElementsByTagName('script')[0];
         to.parentNode.insertBefore(s, to);
-      })();</script><a href="https://1map.com/map-embed">1 Map</a></div>
+      })();</script><a href="https://1map.com/map-embed">1 Map</a></div> -->
+
+      
+        <head>
+          <title>Simple Map</title>
+          <style>
+              * {
+                  margin: 0;
+                  padding: 0;
+              }
+              #map {
+                  height: 500px;
+                  width: 100%; 
+              }
+          </style>
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+          <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9XFiEJhU59cDGZ3QJ0tgAvlN6YK9x1zg&callback=initMap&libraries=&v=weekly"
+            defer
+          ></script>
+          <link rel="stylesheet" type="text/css" href="./style.css" />
+          <script src="./index.js"></script>
+        </head>
+
+        <body>
+            <div id="map"></div>
+            <script>
+                function initMap() {
+                    var location = {lat: 38.0336, lng: -78.5080};
+                    var map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 15,
+                        center: location
+                    });
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                }
+            </script>
+        </body>
+
       
 </body>
 
