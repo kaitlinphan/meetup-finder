@@ -3,7 +3,6 @@
 
 {% block content %}
     <head>
-        <title>Add Map</title>
         <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbcslruZ5Mdsa9QcmcgC50JdRLCyQIZc4&callback=initMap&libraries=&v=weekly"
                 defer
@@ -20,16 +19,14 @@
         <script>
             // Initialize and add the map
             function initMap() {
-                // The location of Uluru
-                const uluru = { lat: -25.344, lng: 131.036 };
-                // The map, centered at Uluru
+                const loc = { lat: 0, lng: 0 };
                 const map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 7,
-                    center: uluru,
+                    center: loc,
                 });
                 // The marker, positioned at Uluru
                 const marker = new google.maps.Marker({
-                    position: uluru,
+                    position: loc,
                     map: map,
                 });
             }

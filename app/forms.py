@@ -5,4 +5,4 @@ from django import forms
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['title', 'location', 'info', 'image']
+        fields = ['title', 'location', 'info', 'xcoord', 'ycoord', 'image']
