@@ -43,7 +43,6 @@ class User(AbstractUser):
     date_joined				= models.DateTimeField(verbose_name='date joined', auto_now=True)
     last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin				= models.BooleanField(default=False)
-    is_active				= models.BooleanField(default=True)
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
     EVENTS					= models.ManyToManyField(Event)
@@ -63,12 +62,6 @@ class User(AbstractUser):
 	# Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
-	
-    '''def save(self, *args, **kwargs):
-    	if not self.pk:
-    		self.set_coords()
-    	super(User, self).save(*args, **kwargs)'''
 
-    
 
 

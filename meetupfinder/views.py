@@ -10,3 +10,6 @@ from django.utils import timezone
 
 def home(request):
     return render(request, 'home.html')
+
+def login(request):
+    return render(request, )
