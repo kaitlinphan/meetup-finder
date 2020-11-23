@@ -25,7 +25,11 @@
                 <a class="nav-item nav-link disabled">{{ user.get_short_name }} <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link active" href="/accounts/logout">Logout <span class="sr-only">(current)</span></a>
             {% else %}
+<<<<<<< HEAD
                 <a class="nav-item nav-link active" href="/accounts/google/login/?process=login">Login <span class="sr-only">(current)</span></a>
+=======
+                <a class="nav-item nav-link active" href="/accounts/google/login?process=login">Login <span class="sr-only">(current)</span></a>
+>>>>>>> dcde6381508ed2787fc7082b6dd04e18bdbf2515
                 <a class="nav-item nav-link active" href="/accounts/signup">Signup <span class="sr-only">(current)</span></a>
             {% endif %}
         </ul>

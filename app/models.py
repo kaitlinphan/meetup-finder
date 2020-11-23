@@ -12,6 +12,7 @@ class Event(models.Model):
     xcoord = models.FloatField(default=0.0)
     ycoord = models.FloatField(default=0.0)
 
+
 class RegisteredEvents(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
