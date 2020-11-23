@@ -81,7 +81,8 @@ def search(request):
         query_string = request.GET['q']
         events_check_info = Event.objects.filter(info__icontains=query_string)
         events_check_title = Event.objects.filter(title__icontains=query_string)
-        events = events_check_info | events_check_title
+        events_check_date = Event.objects.filter(created__startswith=query_string)
+        events = events_check_info | events_check_title | events_check_date
         return render(request, 'app/event_index.html', {'events': events})
     else:
         events = Event.objects.all()
