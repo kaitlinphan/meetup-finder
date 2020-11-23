@@ -19,9 +19,9 @@
         <script>
             // Initialize and add the map
             function initMap() {
-                const loc = { lat: 0, lng: 0 };
+                const loc = { lat: {{event.ycoord}}, lng: {{event.xcoord}}};
                 const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 7,
+                    zoom: 15,
                     center: loc,
                 });
                 // The marker, positioned at Uluru
