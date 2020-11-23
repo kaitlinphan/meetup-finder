@@ -86,13 +86,29 @@ WSGI_APPLICATION = 'meetupfinder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+#     },
+#     # 'defaut': {
+#     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     #     'NAME': 'meetupfinder',
+#     #     'USER': 'postgres',
+#     #     'PASSWORD': 'AZ6bP6g2P6sSrdd4',
+#     #     'HOST': '127.0.0.1',
+#     #     'PORT': '5432'
+#     # }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'meetupfinder',
-        'USER': 'postgres',
-        'PASSWORD': 'AZ6bP6g2P6sSrdd4',
-        'HOST': '127.0.0.1',
+        'NAME': 'd2rpo96opa3d72',
+        'USER': 'whjnobifapsoit',
+        'PASSWORD': 'd2284c545e344843ecb81fdc829c01e3c8bc31d40319cf313b5386510f35cab9',
+        'HOST': 'ec2-52-23-86-208.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
@@ -104,16 +120,6 @@ if 'test' in sys.argv:
         'NAME': 'mydatabase'
     }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd2rpo96opa3d72',
-#         'USER': 'whjnobifapsoit',
-#         'PASSWORD': 'd2284c545e344843ecb81fdc829c01e3c8bc31d40319cf313b5386510f35cab9',
-#         'HOST': 'ec2-52-23-86-208.compute-1.amazonaws.com',
-#         'PORT': '5432'
-#     }
-# }
 
 AUTHENTICATION_BACKENDS = [
     
