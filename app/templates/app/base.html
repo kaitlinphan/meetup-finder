@@ -30,7 +30,7 @@
                     {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
-                    <button type="button" class="btn btn-link" type="submit">{% trans 'Logout' %} </button>
+                    <button class="btn btn-link" type="submit">{% trans 'Logout' %} </button>
                 </form>
             {% else %}
                 <a class="nav-item nav-link active" href="/accounts/google/login/?process=login">Login <span class="sr-only">(current)</span></a>
