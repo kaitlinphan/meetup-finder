@@ -9,8 +9,14 @@ class Event(models.Model):
     info = models.TextField(blank=True)
     image = models.ImageField(upload_to="images", blank=True)
     location = models.CharField('Location', default='', max_length=500, blank=True)
+    poster = models.CharField('Poster', default='', max_length=25)
 
 
 class RegisteredEvents(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+
+
+class CreatedEvents(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
