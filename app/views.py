@@ -91,10 +91,9 @@ def register(request, event_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('app:event_detail'))
     event = get_object_or_404(Event, pk=event_id)
+    attendees = RegisteredEvents.objects.filter(event=event)
     # adds event to list of registered events
     if RegisteredEvents.objects.filter(event=event, user=request.user).exists():
-        attendees = RegisteredEvents.objects.filter(event=event)
-
         context = {
             'event': event,
             'error_message': "Already registered!",
@@ -103,7 +102,12 @@ def register(request, event_id):
         return render(request, 'app/event_detail.html', context)
     registered_event = RegisteredEvents(event=event, user=request.user)
     registered_event.save()
-    return HttpResponseRedirect(reverse('app:profile'))
+    context = {
+        'event': event,
+        'error_message': "Successfully registered!",
+        'attendees': attendees
+    }
+    return render(request, 'app/event_detail.html', context)
 
 
 def unregister(request, event_id):
