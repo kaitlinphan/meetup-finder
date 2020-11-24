@@ -1,76 +1,56 @@
 {% extends 'app/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
-    <head>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbcslruZ5Mdsa9QcmcgC50JdRLCyQIZc4&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-    <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-          height: 100%;
-          width: 50%;
-      }
-    </style>
-    <script>
-      function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 8,
-          center: { lat: 0, lng: 0 },
-        });
-        const geocoder = new google.maps.Geocoder();
-        geocodeAddress(geocoder, map);
-      }
-
-      event_address = '{{ event.address }}'
-
-      function geocodeAddress(geocoder, resultsMap) {
-        geocoder.geocode({address: event_address}, (results, status) => {
-          if (status === "OK") {
-            resultsMap.setCenter(results[0].geometry.location);
-            new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location,
-            });
-          } else {
-            //alert(
-            //  "Geocode was not successful for the following reason: " + status
-            //);
-          }
-        });
-      }
-    </script>
-
-    </head>
     <body>
-    <h1>{{ event.title }}</h1>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <div class="row">
-        <div class="col-md-8">
-            <img src="{{ event.image.url }}" alt="" width="100%">
+    <br>
+    <div class="container">
+        <h1>{{ event.title }}</h1>
+        {% if error_message %}<p class="text-center">{{ error_message }}</p>{% endif %}
+        <div class="row">
+            {% if event.image %}
+                <div class="col-md-6">
+                    <img src="{{ event.image.url }}" alt="" width="100%">
+                </div>
+            {% endif %}
+            <div class="col-md-6">
+                <h5>About the event:</h5>
+                {% if event.info %}
+                    <p>{{ event.info }}</p>
+                {% else %}
+                    <p>No information given.</p>
+                {% endif %}
+                <br>
+                <h5>Date:</h5>
+                <p>{{ event.day }}</p>
+                <br>
+                <h5>Location:</h5>
+                {% if not event.location %}
+                    <p>N/A</p>
+                {% else %}
+                    <p>{{ event.location }}</p>
+                {% endif %}
+            </div>
         </div>
-        <div class="col-md-4">
-            <h5>About the event:</h5>
-            <p>{{ event.info }}</p>
-            <br>
-            <h5>Date:</h5>
-            <p>{{ event.day }}</p>
-            <br>
-            <h5>Location:</h5>
-            <p>{{ event.address }}</p>
-        </div>
-    </div>
-    <div id="map"></div>
 
-    {% if user.is_authenticated %}
-        <form action="{% url 'app:register' event.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Register</button>
-        </form>
-    {% endif %}
+        <br>
+        <a href="{% url 'app:event_index'%}"
+           class="btn btn-primary">
+            Go Back
+        </a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'app:register' event.pk %}"
+               class="btn btn-success">
+                Register
+            </a>
+        {% endif %}
+        {% if event.location %}
+            <a href="{% url 'app:view_map' event.pk %}"
+               class="btn btn-primary">
+                See Location
+            </a>
+        {% endif %}
+
+    </div>
     </body>
 
 {% endblock %}
