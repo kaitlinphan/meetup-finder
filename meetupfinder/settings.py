@@ -178,7 +178,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/profile"
+ACCOUNT_LOGOUT_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "/"
 
 try:
     # Configure Django App for Heroku.
@@ -186,7 +187,3 @@ try:
     django_heroku.settings(locals())
 except ImportError:
     found = False
-
-if 'DATABASE_URL' in os.environ:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
