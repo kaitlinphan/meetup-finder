@@ -39,7 +39,7 @@
                             position: results[0].geometry.location,
                         });
                     } else {
-                        event_address = null
+                        resultsMap.delete()
                         //alert(
                         //"Geocode was not successful for the following reason: " + status
                         //);
@@ -52,7 +52,7 @@
     <body>
     <br>
     <div class="container">
-        {% if 'event_address' %}
+        {% if event.location %}
             <div id='map'></div>
         {% else %}
             <p class="text-center">Geolocation not found.</p>

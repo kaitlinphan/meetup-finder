@@ -27,32 +27,56 @@
     <br>
     <div class="container">
         <h2>Registered Events</h2>
-        {% if not events %}<p class="text-center">No events registered.</p>
+        {% if not registered_events %}<p class="text-center">No events registered.</p>
         {% else %}
             <div class="row">
-            {% for event in events %}
-                <div class="col-md-4">
-                    <div class="card mb-2">
-                        {% if event.event.image %}
-                            <img class="card-img-top" src="{{ event.event.image.url }}">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ event.event.title }}</h5>
-                            <p class="card-text">{{ event.event.info }}</p>
-                            <a href="{% url 'app:unregister' event.event.pk %}"
-                               class="btn btn-primary">
-                                Unregister
-                            </a>
-                            <a href="{% url 'app:event_detail' event.event.pk %}"
-                               class="btn btn-primary">
-                                Read More
-                            </a>
+                {% for event in registered_events %}
+                    <div class="col-md-4">
+                        <div class="card mb-2">
+                            {% if event.event.image %}
+                                <img class="card-img-top" src="{{ event.event.image.url }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.event.title }}</h5>
+                                <p class="card-text">{{ event.event.info }}</p>
+                                <a href="{% url 'app:unregister' event.event.pk %}"
+                                   class="btn btn-primary">
+                                    Unregister
+                                </a>
+                                <a href="{% url 'app:event_detail' event.event.pk %}"
+                                   class="btn btn-primary">
+                                    Read More
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         {% endif %}
-        </div>
+        <h2>Created Events</h2>
+        {% if not created_events %}<p class="text-center">No events created.</p>
+        {% else %}
+            <div class="row">
+                {% for event in created_events %}
+                    <div class="col-md-4">
+                        <div class="card mb-2">
+                            {% if event.event.image %}
+                                <img class="card-img-top" src="{{ event.event.image.url }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.event.title }}</h5>
+                                <p class="card-text">{{ event.event.info }}</p>
+                                <a href="{% url 'app:event_detail' event.event.pk %}"
+                                   class="btn btn-primary">
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
     </div>
     </body>
 {% endblock %}

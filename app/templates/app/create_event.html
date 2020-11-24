@@ -10,42 +10,38 @@
 
 {% block content %}
     <br>
+
     <div class="container">
-        <div class = "row">
-            <form action="{% url 'app:create_event' %}" method="post" enctype="multipart/form-data" novalidate>
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-2">
-                        {{ form.title|as_crispy_field }}
-                    </div>
-                </div>
-                {{ form.day|as_crispy_field }}
-                {{ form.info|as_crispy_field }}
-                {{ form.location|as_crispy_field }}
-                {{ form.image|as_crispy_field }}
-                <br>
-                <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-        </div>
+        <h1 class="welcome">Create an Event</h1>
+        {% if failed %}
+            <p class="text-center">Fill in all fields with an *.</p>
+        {% endif %}
+        <form class=form autocomplete='off' action="{% url 'app:create_event' %}" method="post"
+              enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title*</label>
+                <input type="text" class="form-control" name="title" id="title" maxlength="200">
+            </div>
+            <div class="form-group">
+                <label for="day">Date*</label>
+                <input type="date" class="form-control" name="date" id="date">
+            </div>
+            <div class="form-group">
+                <label for="info">Event Info</label>
+                <input type="text" class="form-control" name="info" id="info">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" name="location" id="location" maxlength="500">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Upload Image</label>
+                <input type="file" accept="image/png,image/jpg,image/jpeg" class="form-control-file" id="image" name="image">
+                <p><small class="text">Accepted file types: .jpg, .jpeg, .png</small></p>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
     </div>
 {% endblock %}
-
-<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>
-    $(document).ready(function(){
-        var date_input=$('input[name="date"]'); //our date input has the name "date"
-        date_input.datepicker({
-            format: 'mm/dd/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        })
-    })
-</script>
