@@ -6,11 +6,9 @@ import datetime
 class Event(models.Model):
     title = models.CharField('Title', max_length=200)
     day = models.DateField('Day of the event', default=datetime.date.today, help_text='YYYY-MM-DD')
-    location = models.CharField('Location', max_length=150)
     info = models.TextField()
     image = models.ImageField(upload_to="images")
-    xcoord = models.FloatField(default=0.0)
-    ycoord = models.FloatField(default=0.0)
+    address = models.CharField('Address', max_length=500)
 
 
 class RegisteredEvents(models.Model):

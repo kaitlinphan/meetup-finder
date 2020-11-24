@@ -3,34 +3,47 @@
 
 {% block content %}
     <head>
-        <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbcslruZ5Mdsa9QcmcgC50JdRLCyQIZc4&callback=initMap&libraries=&v=weekly"
-                defer
-        ></script>
-        <style type="text/css">
-            /* Set the size of the div element that contains the map */
-            #map {
-                height: 400px;
-                /* The height is 400 pixels */
-                width: 100%;
-                /* The width is the width of the web page */
-            }
-        </style>
-        <script>
-            // Initialize and add the map
-            function initMap() {
-                const loc = { lat: 0, lng: 0 };
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 7,
-                    center: loc,
-                });
-                // The marker, positioned at Uluru
-                const marker = new google.maps.Marker({
-                    position: loc,
-                    map: map,
-                });
-            }
-        </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbcslruZ5Mdsa9QcmcgC50JdRLCyQIZc4&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+          height: 100%;
+          width: 50%;
+      }
+    </style>
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 8,
+          center: { lat: 0, lng: 0 },
+        });
+        const geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, map);
+      }
+
+      event_address = '{{ event.address }}'
+
+      function geocodeAddress(geocoder, resultsMap) {
+        geocoder.geocode({address: event_address}, (results, status) => {
+          if (status === "OK") {
+            resultsMap.setCenter(results[0].geometry.location);
+            new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location,
+            });
+          } else {
+            //alert(
+            //  "Geocode was not successful for the following reason: " + status
+            //);
+          }
+        });
+      }
+    </script>
+
     </head>
     <body>
     <h1>{{ event.title }}</h1>
@@ -47,7 +60,7 @@
             <p>{{ event.day }}</p>
             <br>
             <h5>Location:</h5>
-            <p>{{ event.location }}</p>
+            <p>{{ event.address }}</p>
         </div>
     </div>
     <div id="map"></div>

@@ -101,17 +101,23 @@ WSGI_APPLICATION = 'meetupfinder.wsgi.application'
 #     # }
 # }
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2rpo96opa3d72',
-        'USER': 'whjnobifapsoit',
-        'PASSWORD': 'd2284c545e344843ecb81fdc829c01e3c8bc31d40319cf313b5386510f35cab9',
-        'HOST': 'ec2-52-23-86-208.compute-1.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd2rpo96opa3d72',
+#         'USER': 'whjnobifapsoit',
+#         'PASSWORD': 'd2284c545e344843ecb81fdc829c01e3c8bc31d40319cf313b5386510f35cab9',
+#         'HOST': 'ec2-52-23-86-208.compute-1.amazonaws.com',
+#         'PORT': '5432'
+#     }
+# }
 
 import sys
 if 'test' in sys.argv:
@@ -172,7 +178,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATICFILES_STORAGE = 'whitenoise.django.CompressedManifestStaticFilesStorage'
 ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/profile"
 
 try:
