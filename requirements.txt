@@ -27,3 +27,4 @@ urllib3==1.25.10
 whitenoise==5.2.0
 cloudinary==1.17.0
 dj3-cloudinary-storage==0.0.1
+django-heroku
